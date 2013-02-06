@@ -35,7 +35,11 @@ ifndef DISABLE_DIALECT
 DATA += plcoffee.control plcoffee--$(PLV8_VERSION).sql \
 		plls.control plls--$(PLV8_VERSION).sql
 endif
-DATA_built = plv8.sql
+DATA_built = plv8.sql modules
+modules:
+	mkdir -p /usr/local/plv8/lib
+	cp etc/init.js /usr/local/plv8/init.js
+	cp etc/lib/* /usr/local/plv8/lib/
 REGRESS = init-extension plv8 inline json startup_pre startup varparam json_conv \
 		  window
 ifndef DISABLE_DIALECT
